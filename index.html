@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Francisco Flores - Ingeniero en Ciencia de Datos</title>
+<meta name="description" content="Francisco Flores, Ingeniero en Ciencia de Datos en Quito. Experiencia con Python, Power BI y grandes volúmenes de datos. Busco mi primer rol en datos o IA aplicada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f3f6fb;
+  --border: #d5dce8;
+  --border-strong: #7a8599;
+  --text: #172033;
+  --text-muted: #4a5568;
+  --accent: #005cd4;
+  --accent-hover: #004aab;
+  --on-accent: #ffffff;
+  --highlight: #ffb6a2;
+  --highlight-hover: #ff9e85;
+  --on-highlight: #172033;
+  --hero: #005cd4;
+  --on-hero: #ffffff;
+  --on-hero-muted: #e3ecfa;
+  --border-hero: #a6c3ec;
+  --series-line: 255, 255, 255;
+  --series-grid: rgba(255, 255, 255, 0.12);
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+  --f-body: "Familjen Grotesk", system-ui, sans-serif;
+  --f-mono: "Spline Sans Mono", ui-monospace, monospace;
+  --fs-sm: 0.875rem; --fs-base: 1rem; --fs-lg: 1.25rem; --fs-xl: 1.5rem; --fs-2xl: 2rem;
+  --fs-display: clamp(2.5rem, 8vw, 4.5rem);
+  --lh-body: 1.6;
+  --lh-heading: 1.2;
+  --lh-display: 1.05;
+
+  --measure: 65ch;
+  --measure-lead: 52ch;
+  --container: 1120px;
+  --pad: var(--s-4);
+  --col-label: 12.5rem;
+  --nav-gap: var(--s-3);
+  --section-pad: var(--s-7);
+  --h2-gap: var(--s-5);
+  --hero-pad: var(--s-8);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --line: 1px;
+  --focus-w: 2px;
+  --focus-offset: 3px;
+  --underline-offset: 3px;
+  --control-h: 44px;
+  --topbar-h: var(--s-9);
+  --hero-min: min(64svh, 560px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 180ms;
+}
+@media (min-width: 40em) { :root { --nav-gap: var(--s-4); --pad: var(--s-5); --topbar-h: var(--s-8); --section-pad: var(--s-8); --h2-gap: var(--s-6); } }
+@media (min-width: 64em) { :root { --pad: var(--s-6); --nav-gap: var(--s-5); --section-pad: var(--s-9); --h2-gap: var(--s-7); --hero-pad: var(--s-9); } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--topbar-h); }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-underline-offset: var(--underline-offset); }
+a:hover { color: var(--accent-hover); text-decoration-thickness: var(--focus-w); }
+:focus-visible { outline: var(--focus-w) solid var(--accent); outline-offset: var(--focus-offset); border-radius: var(--radius-sm); }
+.wrap { width: 100%; max-width: var(--container); margin: 0 auto; padding-inline: var(--pad); }
+
+.skip { position: absolute; left: var(--s-4); top: calc(-1 * var(--s-9)); z-index: 200; padding: var(--s-2) var(--s-4); background: var(--bg); color: var(--text); border-radius: var(--radius-sm); }
+.skip:focus { top: var(--s-2); }
+
+.topbar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: var(--line) solid var(--border); }
+.topbar__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: var(--s-5); padding-block: var(--s-2); }
+.topbar__brand { font-weight: 700; color: var(--text); text-decoration: none; white-space: nowrap; padding-block: var(--s-2); }
+.topbar__nav { overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.topbar__nav::-webkit-scrollbar { display: none; }
+.topbar__nav ul { display: flex; flex-wrap: wrap; column-gap: var(--nav-gap); row-gap: 0; list-style: none; margin: 0; padding: 0; }
+.topbar__nav a { display: inline-flex; align-items: center; min-height: var(--control-h); font-size: var(--fs-sm); color: var(--text-muted); text-decoration: none; white-space: nowrap; }
+.topbar__nav a:hover, .topbar__nav a[aria-current="location"] { color: var(--accent); }
+
+.hero { position: relative; background: var(--hero); color: var(--on-hero); overflow: hidden; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__in { position: relative; padding-block: var(--hero-pad); padding-top: calc(var(--hero-pad) + var(--s-7)); min-height: var(--hero-min); display: flex; flex-direction: column; justify-content: flex-end; gap: var(--s-5); }
+@media (min-width: 56.25em) { .hero__in { padding-top: var(--hero-pad); } }
+.hero__id { display: flex; flex-direction: column; gap: var(--s-2); }
+.hero__place { font-size: var(--fs-sm); color: var(--on-hero-muted); margin: 0; }
+.hero h1 { font-size: var(--fs-display); line-height: var(--lh-display); letter-spacing: -0.03em; font-weight: 700; margin: 0; }
+.hero__role { font-size: var(--fs-xl); line-height: var(--lh-heading); font-weight: 600; color: var(--highlight); margin: 0; }
+.hero__lead { font-size: var(--fs-lg); max-width: var(--measure-lead); margin: 0; color: var(--on-hero-muted); }
+.hero__links { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-2); }
+@media (min-width: 40em) { .hero__role { font-size: var(--fs-2xl); } }
+
+.btn { display: inline-flex; align-items: center; min-height: var(--control-h); padding: 0 var(--s-5); border-radius: var(--radius); font-family: var(--f-body); font-size: var(--fs-base); font-weight: 600; text-decoration: none; border: var(--line) solid transparent; transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+.btn--primary { background: var(--highlight); color: var(--on-highlight); }
+.btn--primary:hover { background: var(--highlight-hover); color: var(--on-highlight); }
+.btn--ghost { color: var(--on-hero); border-color: var(--border-hero); }
+.btn--ghost:hover { color: var(--on-hero); border-color: var(--on-hero); }
+.btn:active { transform: translateY(var(--line)); }
+.hero .btn:focus-visible { outline-color: var(--on-hero); }
+
+.section { padding-block: var(--section-pad); }
+.section--tint { background: var(--surface); }
+.h2 { font-size: var(--fs-2xl); line-height: var(--lh-heading); letter-spacing: -0.02em; font-weight: 700; margin: 0 0 var(--h2-gap); }
+.lead { max-width: var(--measure); margin: 0; }
+.lead + .rows { margin-top: var(--s-5); }
+.note { max-width: var(--measure); margin: var(--s-6) 0 0; color: var(--text-muted); }
+
+.rows { list-style: none; margin: 0; padding: 0; border-top: var(--line) solid var(--border-strong); }
+.row { display: grid; grid-template-columns: 1fr; gap: var(--s-2); padding-block: var(--s-5); border-bottom: var(--line) solid var(--border); }
+@media (min-width: 45em) { .row { grid-template-columns: var(--col-label) 1fr; column-gap: var(--s-6); align-items: baseline; } }
+.row__label { font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--text-muted); }
+.row__body { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.row h3 { margin: 0 0 var(--s-1); font-size: var(--fs-lg); font-weight: 600; letter-spacing: -0.01em; line-height: var(--lh-heading); }
+.row__org { margin: 0; color: var(--text-muted); }
+.row__org + p { margin: var(--s-3) 0 0; max-width: var(--measure); }
+
+.contact { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-2); }
+.contact a { display: inline-flex; align-items: center; gap: var(--s-3); min-height: var(--control-h); text-decoration: none; }
+.contact a:hover span { text-decoration: underline; text-decoration-thickness: var(--focus-w); }
+.contact svg { width: var(--s-5); height: var(--s-5); fill: currentColor; flex: none; }
+.grid { display: grid; gap: var(--s-5); grid-template-columns: 1fr; }
+@media (min-width: 45em) { .grid--2 { grid-template-columns: 1fr 1fr; } }
+.card { background: var(--bg); border: var(--line) solid var(--border); border-radius: var(--radius); padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-3); }
+.card__head { display: flex; flex-direction: column; gap: var(--s-1); }
+.card h3 { margin: 0; font-size: var(--fs-lg); line-height: var(--lh-heading); font-weight: 600; letter-spacing: -0.01em; }
+.card p { margin: 0; }
+.card__meta { font-size: var(--fs-sm); color: var(--text-muted); }
+.card__link { margin-top: auto; }
+.tags { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; margin: 0; padding: 0; }
+.tags li { font-family: var(--f-mono); font-size: var(--fs-sm); padding: var(--s-1) var(--s-2); border: var(--line) solid var(--border-strong); border-radius: var(--radius-sm); }
+
+.footer { padding-block: var(--s-6); border-top: var(--line) solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+  .btn:active { transform: none; }
+}
+@media print {
+  .topbar, .skip, .hero canvas, .hero__links { display: none; }
+  .hero, .section--tint { background: none; color: var(--text); }
+  .hero__role, .hero__lead, .hero__place { color: var(--text); }
+  .hero__in { min-height: 0; padding-block: var(--s-5); }
+  .section { padding-block: var(--s-5); }
+  .row, .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <a class="topbar__brand" href="#inicio">Francisco Flores</a>
+    <nav class="topbar__nav" aria-label="Secciones">
+      <ul>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#formacion">Formación</a></li>
+        <li><a href="#herramientas">Herramientas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <canvas id="series" aria-hidden="true"></canvas>
+    <div class="wrap hero__in">
+      <div class="hero__id">
+        <p class="hero__place">Quito, Ecuador</p>
+        <h1 id="hero-title">Francisco Flores</h1>
+        <p class="hero__role">Ingeniero en Ciencia de Datos</p>
+      </div>
+      <p class="hero__lead">Trabajo con datos: limpio y cruzo bases de gran volumen, automatizo procesos con Python y diseño dashboards en Power BI. Me interesan la IA aplicada, el análisis de lenguaje y las redes. Busco mi primer rol en datos o IA aplicada.</p>
+      <div class="hero__links">
+        <a class="btn btn--primary" href="mailto:panchoflo13@gmail.com">Escribirme un correo</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/franciscoflores13">LinkedIn</a>
+        <a class="btn btn--ghost" href="https://github.com/Panchoflo14">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experiencia" aria-labelledby="experiencia-title">
+    <div class="wrap">
+      <h2 class="h2" id="experiencia-title">Experiencia laboral</h2>
+      <ol class="rows">
+        <li class="row">
+          <span class="row__label">Mar 2026 - May 2026</span>
+          <div class="row__body">
+            <h3>Operativo de Nómina</h3>
+            <p class="row__org">Dirección Financiera, PUCE</p>
+            <p>Audité bases de presupuesto contra el rol de pagos para encontrar desviaciones. También apoyé el cambio del cuadre presupuestario, que se hacía a mano en Excel, a un proceso basado en código.</p>
+          </div>
+        </li>
+        <li class="row">
+          <span class="row__label">Ene 2025 - Dic 2025</span>
+          <div class="row__body">
+            <h3>Analista de Datos</h3>
+            <p class="row__org">Vicerrectorado de Docencia y Estudiantes, PUCE (freelance)</p>
+            <p>Limpié, depuré y crucé las bases institucionales de todas las sedes con sistemas gubernamentales para detectar anomalías. Automaticé con Python la estandarización de formatos y armé dashboards de gobernanza de datos para indicadores académicos.</p>
+          </div>
+        </li>
+        <li class="row">
+          <span class="row__label">Nov 2024 - Jul 2025</span>
+          <div class="row__body">
+            <h3>Analista de Visualización de Datos</h3>
+            <p class="row__org">Observatorio de Educación, PUCE</p>
+            <p>Procesé y estandaricé bases del Ministerio de Educación y de la SENESCYT para analizar la matrícula en las 24 provincias del país. Con esos datos diseñé dashboards interactivos en Power BI por nivel educativo y por provincia.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="proyectos" aria-labelledby="proyectos-title">
+    <div class="wrap">
+      <h2 class="h2" id="proyectos-title">Proyectos</h2>
+      <div class="grid grid--2">
+        <article class="card">
+          <div class="card__head">
+            <p class="card__meta">Investigación independiente</p>
+            <h3>koselleck-networks</h3>
+          </div>
+          <p>Estudio el cambio semántico del inglés entre 1770 y 1830 con network science. Construí redes de similitud entre palabras, detecté comunidades y armé un explorador interactivo en Flask.</p>
+          <ul class="tags" aria-label="Tecnologías"><li>Python</li><li>Network science</li><li>NLP</li><li>Flask</li></ul>
+          <a class="card__link" href="https://github.com/Panchoflo14/koselleck-networks">Repositorio de koselleck-networks</a>
+        </article>
+        <article class="card">
+          <div class="card__head">
+            <p class="card__meta">Monografía de grado</p>
+            <h3>Revisión sistemática sobre fine-tuning de LLM</h3>
+          </div>
+          <p>Revisé con el protocolo PRISMA 84 estudios publicados entre 2020 y 2025. El screening está en notebooks, y la monografía y el póster están escritos en LaTeX.</p>
+          <ul class="tags" aria-label="Tecnologías"><li>LLM</li><li>PRISMA</li><li>LaTeX</li></ul>
+          <a class="card__link" href="https://github.com/Panchoflo14/llm-finetuning-systematic-review">Repositorio de la revisión</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="formacion" aria-labelledby="formacion-title">
+    <div class="wrap">
+      <h2 class="h2" id="formacion-title">Formación</h2>
+      <ol class="rows">
+        <li class="row">
+          <span class="row__label">2022 - 2026</span>
+          <div class="row__body">
+            <h3>Ingeniería en Ciencia de Datos</h3>
+            <p class="row__org">Pontificia Universidad Católica del Ecuador (PUCE), titulado en 2026</p>
+          </div>
+        </li>
+        <li class="row">
+          <span class="row__label">2026</span>
+          <div class="row__body">
+            <h3>Microsoft Power BI Data Analyst</h3>
+            <p class="row__org">Certificado profesional de Coursera. El examen PL-300 está pendiente.</p>
+          </div>
+        </li>
+        <li class="row">
+          <span class="row__label">Cursos</span>
+          <div class="row__body">
+            <h3>RAG, agentes y prompting</h3>
+            <p class="row__org">DAIR.AI</p>
+          </div>
+        </li>
+      </ol>
+      <p class="note">Ahora estudio FastAPI, Docker, MCP y evaluación de sistemas con LLM. Con eso estoy construyendo un sistema RAG sobre datos públicos de educación de Ecuador, que todavía no está publicado.</p>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="herramientas" aria-labelledby="herramientas-title">
+    <div class="wrap">
+      <h2 class="h2" id="herramientas-title">Herramientas</h2>
+      <ul class="rows">
+        <li class="row">
+          <span class="row__label">Programación y análisis</span>
+          <div class="row__body"><ul class="tags"><li>Python</li><li>pandas</li><li>numpy</li><li>R</li></ul></div>
+        </li>
+        <li class="row">
+          <span class="row__label">Bases de datos y hojas de cálculo</span>
+          <div class="row__body"><ul class="tags"><li>SQL</li><li>Excel</li></ul></div>
+        </li>
+        <li class="row">
+          <span class="row__label">Visualización</span>
+          <div class="row__body"><ul class="tags"><li>Power BI</li><li>Tableau</li></ul></div>
+        </li>
+        <li class="row">
+          <span class="row__label">IA aplicada</span>
+          <div class="row__body"><ul class="tags"><li>LangChain</li><li>Flujos de agentes</li></ul></div>
+        </li>
+        <li class="row">
+          <span class="row__label">Idiomas</span>
+          <div class="row__body"><ul class="tags"><li>Español nativo</li><li>Cambridge B2 First</li></ul></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contacto" aria-labelledby="contacto-title">
+    <div class="wrap">
+      <h2 class="h2" id="contacto-title">Contacto</h2>
+      <p class="lead">Busco un primer rol en datos o IA aplicada, con trabajo cercano a usuarios reales. Respondo más rápido por correo.</p>
+      <ul class="contact">
+        <li>
+          <a href="mailto:panchoflo13@gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.2 2L12 12.6 19.8 7H4.2z"/></svg>
+            <span>panchoflo13@gmail.com</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/franciscoflores13">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm1.5 8v8.5h3V10h-3zM7 5.5a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5zM10.5 10v8.5h3v-4.6c0-1.2.6-1.9 1.6-1.9s1.4.7 1.4 1.9v4.6h3v-5.2c0-2.4-1.3-3.5-3.1-3.5-1.3 0-2.1.7-2.5 1.3V10h-3z"/></svg>
+            <span>franciscoflores13</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/Panchoflo14">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            <span>Panchoflo14</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">Francisco Flores. Quito, Ecuador.</div>
+</footer>
+
+<script>
+(function () {
+  var canvas = document.getElementById('series');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var css = getComputedStyle(document.documentElement);
+  var gridColor = css.getPropertyValue('--series-grid').trim();
+  var lineRgb = css.getPropertyValue('--series-line').trim();
+  var accent = css.getPropertyValue('--highlight').trim();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SPEED = 0.018;
+  var STEP = 56;
+  var layouts = {
+    wide: [
+      { seed: 3.1, base: 0.20, amp: 0.10, width: 1.5, alpha: 0.30, color: null },
+      { seed: 11.7, base: 0.36, amp: 0.11, width: 1.5, alpha: 0.38, color: null },
+      { seed: 23.4, base: 0.54, amp: 0.12, width: 2.5, alpha: 0.95, color: accent }
+    ],
+    compact: [
+      { seed: 3.1, base: 0.05, amp: 0.02, width: 1.5, alpha: 0.30, color: null },
+      { seed: 11.7, base: 0.095, amp: 0.02, width: 1.5, alpha: 0.38, color: null },
+      { seed: 23.4, base: 0.14, amp: 0.02, width: 2.5, alpha: 0.95, color: accent }
+    ]
+  };
+  var series = layouts.wide, compact = false;
+  var w = 0, h = 0, raf = null, offset = 600, last = 0;
+
+  function rand(n, seed) {
+    var x = Math.sin(n * 127.1 + seed * 311.7) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  function noise(u, seed) {
+    var i = Math.floor(u), f = u - i;
+    var s = f * f * (3 - 2 * f);
+    return rand(i, seed) * (1 - s) + rand(i + 1, seed) * s;
+  }
+
+  function value(s, x) {
+    var u = (x + offset) / STEP;
+    var n = 0.65 * noise(u, s.seed) + 0.35 * noise(u * 2.7, s.seed + 5);
+    return (s.base + (n - 0.5) * 2 * s.amp) * h;
+  }
+
+  function size() {
+    var r = canvas.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height;
+    compact = w < 900;
+    series = compact ? layouts.compact : layouts.wide;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function drawGrid() {
+    var i, x;
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    for (i = 1; i <= 5; i++) {
+      ctx.beginPath(); ctx.moveTo(0, h * i / 6); ctx.lineTo(w, h * i / 6); ctx.stroke();
+    }
+    var shift = offset % (STEP * 2);
+    for (x = -shift; x < w; x += STEP * 2) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+  }
+
+  function drawSeries(s, x0) {
+    var x, y, color = s.color || 'rgba(' + lineRgb + ',' + s.alpha + ')';
+    ctx.beginPath();
+    for (x = 0; x <= w; x += 4) {
+      y = value(s, x);
+      if (x === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = s.width;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    if (s.color) {
+      var cy = value(s, x0);
+      ctx.strokeStyle = 'rgba(' + lineRgb + ',0.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x0, h); ctx.stroke();
+      ctx.fillStyle = s.color;
+      ctx.beginPath(); ctx.arc(x0, cy, 5, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    drawGrid();
+    var x0 = compact ? w * 0.84 : w * 0.82;
+    for (var i = 0; i < series.length; i++) { drawSeries(series[i], x0); }
+    if (!compact) {
+      var fade = ctx.createLinearGradient(0, 0, w, 0);
+      fade.addColorStop(0.5, 'rgba(0, 0, 0, 0)');
+      fade.addColorStop(0.75, 'rgba(0, 0, 0, 1)');
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+
+  function step(t) {
+    if (last) { offset += (t - last) * SPEED; }
+    last = t;
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+
+  size(); draw();
+  if (!reduce) raf = requestAnimationFrame(step);
+  window.addEventListener('resize', function () { size(); draw(); });
+  document.addEventListener('visibilitychange', function () {
+    if (reduce) return;
+    if (document.hidden) { cancelAnimationFrame(raf); last = 0; } else { raf = requestAnimationFrame(step); }
+  });
+})();
+
+(function () {
+  var links = document.querySelectorAll('.topbar__nav a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && map[e.target.id]) {
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        map[e.target.id].setAttribute('aria-current', 'location');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+})();
+</script>
+</body>
+</html>
